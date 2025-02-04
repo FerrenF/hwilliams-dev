@@ -16,26 +16,18 @@
 
 <div class="container">
 
-  {% block nav %}
-    {{ include('navbar.html.twig') }}
-  {% endblock %}
+  {{ include('navbar.html.twig') }}
 
   <main class="content">
 
     {% block content %}
     {% endblock %}
 
-
-    {% block footer %}
-      {{ include('footer.html.twig') }}
-    {% endblock %}
-
+    {{ include('footer.html.twig') }}
   </main>
 </div>
 
-{% block common %}
-  {{ include('common.html.twig') }}
-{% endblock %}
+{{ include('common.html.twig') }}
 
 </body>
 </html>
