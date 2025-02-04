@@ -1,8 +1,5 @@
 {% extends "base.html.twig" %}
 
-
-
-
 {% block content %}
 
 <section id="about">
@@ -136,13 +133,21 @@
                                                     'Machine Learning: Hyper-tuning and application of random forests and embedded models.',
                                                     'Neural Networks: Leveraging graph neural networks to spot patterns in relationships.',
                                                     'Real World Application: Behavioral analysis based on recent data and designed to be generalized to modern platforms.'],
-                                                        projectFoot:'Explore the <a href="https://github.com/FerrenF/GoDot-Eliza">updates</a> about this project on GitHub for more details.'})
+                                                        projectFoot:'Explore the <a href="https://github.com/FerrenF/Lockstep-Original">updates</a> about this project on GitHub for more details.'})
                 }}
             </div>
 
             <div class="column">
-
-
+                {{
+                include('project_card.html.twig', { projectName: 'project_firehose',
+                    projectImage: {src:"img/projects/firehose-1.png",alt:"A definitely not AI-generated picture of... something plugged into an object similar to an electrical outlet, gushing water as if converting the electricity into it. Heh."},
+                    projectTitle:{classes:"img_link github",text:"Python Firehose Processor",href:"https://github.com/FerrenF/GoDot-Eliza"},
+                    projectDesc: "Designed to capture important information from a Bluesky Firehose relay, for use in machine learning research.",
+                    projectBullets:['Python: Uses standard python libraries.',
+                        'Data Mining: Converts the real-time interactions from any of Bluesky\'s firehose relays into parquet format containing only useful information.',
+                        'Multithreading: Uses multithreading to simultaneously listen to the bluesky firehose via websocket, record information, and provides chunk aggregation/pre-processing services for bulk-data assignments - all at once.'],
+                    projectFoot:'This project is both functional and available freely <a href="https://github.com/FerrenF/pythonFirehoseProject">here on github</a>.'})
+                }}
             </div>
 
         </div>
