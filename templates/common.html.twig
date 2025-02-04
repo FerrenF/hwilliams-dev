@@ -1,0 +1,93 @@
+<script type="text/javascript">
+  function toggleSidebar(v){
+
+    const sb =  document.getElementsByClassName('sidebar');
+    const sbL = document.querySelectorAll("nav.sidebar ul li a span");
+    if (!v) {
+      sb[0].classList.remove('sb_mobile_expand');
+      sbL.forEach((item) => item.classList.remove('sb_t_expand'));
+    }
+    else {
+      sb[0].classList.add('sb_mobile_expand');
+      setTimeout(() => {
+        sbL.forEach((item) => item.classList.add('sb_t_expand'))
+      }, 500);
+    }
+
+  }
+
+  (function() {
+
+    let timeoutTracker1
+    const sb =  document.getElementsByClassName('sidebar');
+
+    if(sb.length > 0){
+      sb[0].ontouchstart = function() {
+        clearTimeout(timeoutTracker1);
+        toggleSidebar(true);
+        timeoutTracker1 = setTimeout(function() {
+          toggleSidebar(false);
+        },2000)
+      }
+    }
+
+    const downloadButton = document.getElementById('download-button');
+    let isProcessing = false;
+    downloadButton.style.cursor = 'pointer';
+    downloadButton.addEventListener('click', () => {
+
+      if (isProcessing) return;
+      isProcessing = true;
+      downloadButton.disabled = true;
+      downloadButton.getElementsByTagName('span')[0].textContent = 'Processing...';
+      downloadButton.classList.add('loading');
+
+      /* It's captcha V.3! Meant to protect my resume from the laziest of web crawlers. */
+
+      grecaptcha.ready(() => {
+        grecaptcha.execute('6LfiYa4qAAAAAOcjHtRnvNTS86lTKlJm_kvFpFsw', { action: 'resume_download' }).then((token) => {
+          fetch('resume', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token }),
+          })
+                  .then((response) => {
+                    if (!response.ok) {
+                      return response.json().then((data) => {
+                        throw new Error(data.message || 'Failed to verify CAPTCHA');
+                      });
+                    }
+                    return response.blob();
+                  })
+                  .then((blob) => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'resume_hwilliams.pdf'; // Adjust file name if necessary
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                  })
+                  .catch((error) => {
+                    console.error('Error:', error.message);
+                    alert('Failed to download resume: ' + error.message);
+                  }).finally(() => {
+            setTimeout(() => {
+              isProcessing = false;
+              downloadButton.disabled = false;
+              downloadButton.getElementsByTagName('span')[0].textContent = 'Resume';
+              downloadButton.classList.remove('loading');
+            }, 15000);
+          });
+
+        });
+      });
+    });
+
+
+  })();
+
+</script>

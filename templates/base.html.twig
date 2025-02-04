@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hunter W: About Me</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Personal portfolio of Hunter W.">
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfiYa4qAAAAAOcjHtRnvNTS86lTKlJm_kvFpFsw"></script>
+  <!--
+    Built using Twig, PHP on a lighttpd server.
+  -->
+</head>
+<body>
+
+<div class="container">
+
+  {% block nav %}
+    {{ include('navbar.html.twig') }}
+  {% endblock %}
+
+  <main class="content">
+
+    {% block content %}
+    {% endblock %}
+
+
+    {% block footer %}
+      {{ include('footer.html.twig') }}
+    {% endblock %}
+
+  </main>
+</div>
+
+{% block common %}
+  {{ include('common.html.twig') }}
+{% endblock %}
+
+</body>
+</html>

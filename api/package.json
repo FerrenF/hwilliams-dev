@@ -1,0 +1,19 @@
+{
+  "name": "hwdev_api",
+  "version": "0.0.0",
+  "description": "Backend for captcha download.",
+  "license": "UNLICENSED",
+  "private": false,
+  "dependencies": {
+    "express": "^4.21.2",
+    "body-parser": "^1.20.3",
+    "isomorphic-fetch": "^3.0.0",
+    "dotenv": "^16.4.7",
+    "ioredis": "^5.4.2",
+    "cors": "^2.8.5"
+  },
+  "scripts": {
+    "start" : "node api.js",
+    "start-d": "forever start -a -l forever.log -o out.log -e err.log api.js"
+  }
+}

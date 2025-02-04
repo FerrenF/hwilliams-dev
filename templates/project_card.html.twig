@@ -1,0 +1,15 @@
+<article id="{{ projectName }}" class="dialog box">
+    <div class="embed box d_image">
+        <img src="{{ projectImage.src }}" alt="{{ projectImage.alt }}">
+    </div>
+
+    <h2><a class="{{ projectTitle.classes }}" href="{{ projectTitle.href }}">{{ projectTitle.text }}</a></h2>
+    <p> {{ projectDesc }}</p>
+    <h4>Key Technologies and Skills</h4>
+    <ul>
+        {% for item in projectBullets %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <p>{{ projectFoot }}</p>
+</article>
